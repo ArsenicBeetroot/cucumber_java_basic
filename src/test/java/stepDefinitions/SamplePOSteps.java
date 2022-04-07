@@ -16,11 +16,14 @@ import static org.junit.Assert.assertEquals;
 public class SamplePOSteps {
     private WebDriver driver;
     static AgePage agePage;
+    static WorkPage workPage;
     static AgeSubmittedPage ageSubmittedPage;
+
 
     public SamplePOSteps() {
         this.driver = Hooks.driver;
         agePage = PageFactory.initElements(Hooks.driver, AgePage.class);
+        workPage = PageFactory.initElements(Hooks.driver, WorkPage.class);
         ageSubmittedPage = PageFactory.initElements(Hooks.driver, AgeSubmittedPage.class);
     }
 
@@ -55,4 +58,47 @@ public class SamplePOSteps {
         agePage.enterAge(valuesToEnter.get("age"));
     }
 
+    @Then("^I see error: \"([^\"]*)\" using PO$")
+    public void iSeeErrorInAgePage(String errorText) throws Throwable{
+        agePage.checkErrorMessage(errorText);
+    }
+
+    @Then("^I remain in age page using PO$")
+    public void iAminAgePage() throws Throwable{
+        assertEquals(agePage.getPageUrl(), driver.getCurrentUrl());
+    }
+    // separator for me and myself only
+
+    @Given("^i am on the page$")
+    public void iAmOnWorkPageGiven() throws Throwable {
+        driver.get(workPage.getPageUrl());
+    }
+
+    @When("^i click add person button using PO$")
+    public void iAddPerson() throws Throwable {
+        workPage.clickAddPerson();
+    }
+
+    @And("^i enter name: \"([^\"]*)\" using PO$")
+    public void iEnterWorkName(String name) throws Throwable {
+        workPage.enterName(name);
+    }
+
+    @And("^i enter job: \"([^\"]*)\" using PO$")
+    public void iEnterJobName(String job) throws Throwable {
+        workPage.enterJob(job);
+    }
+
+    @And("^i click add button using PO$")
+    public void iClickAddButton() throws Throwable {
+        workPage.clickAdd();
+    }
+
+    @Then("^i see \"([^\"]*)\" and \"([^\"]*)\" on the list/page idk$")
+    public void iAmOnWorkPage() throws Throwable {
+        driver.get(workPage.getPageUrl());
+    }
+
+
 }
+

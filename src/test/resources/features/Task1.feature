@@ -10,7 +10,7 @@ Feature: Task1 feature
       | smallNumber |
       | 2 |
       | 48 |
-      | 49 |
+
 
   Scenario Outline: big
     Given i am on enter a number page

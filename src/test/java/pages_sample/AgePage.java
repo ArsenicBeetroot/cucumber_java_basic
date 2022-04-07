@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 
 public class AgePage {
+
     @FindBy(how = How.ID, using = "name") // By.id("name")
     private WebElement nameInput; // WebElement nameInput = driver.findElement(By.id("name"));
     @FindBy(how = How.NAME, using = "age") // By.name("age")

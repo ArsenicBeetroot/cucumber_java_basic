@@ -31,3 +31,47 @@ Feature: Introduction to cucumber part 4
       | Ann  | 5   | Hello, Ann, you are a kid    |
       | Bob  | 61  | Hello, Bob, you are an adult |
 
+    # TODO - create Scenario Outline for 'Give us your feedback!' page
+  # URL: https://kristinek.github.io/site/tasks/provide_feedback
+  # Navigate to page
+  # Set Name, Age and Genre
+  # - All input MUST be done in single step
+  # - Step can use Map or Domain object
+  # Click "Send" button and verify that previous input is displayed in correct fields
+
+  @ahaa
+  Scenario: Do the thing
+    Given I am on feedback page
+    When I enter input in feedback page as data table
+      | name  | Bob |
+      | age   | 61  |
+      | genre | male |
+    And I click send feedback
+    Then I can see name "Bob" in feedback check
+    And I can see age "61" in feedback check
+    And I can see genre "male" in feedback check
+
+
+    # TODO - create Scenario Outline for 'Give us your feedback!' page
+  # URL: https://kristinek.github.io/site/tasks/provide_feedback
+  # Navigate to page
+  # Set Name, Age and Genre
+  # - All input MUST be done in single step
+  # - All input MUST use Examples for data
+  # - Step can use Map or Domain object
+  # Click "Send" button and verify that previous input is displayed in correct fields
+
+  Scenario Outline: Do the thing again but differently
+    Given I am on feedback page
+    When I enter input in feedback page:
+      | name  | <name>  |
+      | age   | <age>   |
+      | genre | <genre> |
+    And I click send feedback
+    Then I can see name "<name>" in feedback check
+    And I can see age "<age>" in feedback check
+    And I can see genre "<genre>" in feedback check
+    Examples:
+      | name     | age | genre   |
+      | Jānītis  | 22  | male    |
+      | Ilzīte   | 23  | female  |

@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -207,6 +208,45 @@ public class SampleSteps {
         String message = driver.switchTo().alert().getText();
         System.out.println(message);  // idk if this is needed but its p nice
         alert.accept();
+    }
+
+    // seperator for 7th of april
+
+    @Then("^I can see genre \"([^\"]*)\" in feedback check$")
+    public void iCanSeeGenreInFeedbackCheck(String age) throws Throwable {
+        assertEquals(age, driver.findElement(By.id("gender")).getText());
+    }
+
+    @When("^I select feedback languages$")
+    public void iSelectFeedbackLanguages(List <String> languages) throws Throwable {
+        for (String language : languages) {
+            driver.findElement(By.xpath("//input[@class='w3-check' and @value='" + language + "']" )).click();
+        }
+    }
+
+    @Then("^I can see languages \"([^\"]*)\" in feedback check$")
+    public void iCanSeeLanguages(String languages) throws Throwable {
+        assertEquals(languages, driver.findElement(By.id("language")).getText());
+    }
+
+    @When("^I enter input in feedback page:$")
+    public void iEnterInputInFeedbackPage(Map<String, String> feedbackInput) throws Throwable{
+        if (feedbackInput.containsKey("name")) {
+            iEnterNameInFeedback(feedbackInput.get("name"));
+        }
+        iEnterAgeInFeedback(feedbackInput.get("age"));
+        driver.findElement(By.xpath("//input[@value='" + feedbackInput.get("genre") + "']")).click();
+    }
+
+    @When(("^I enter input in feedback page as data table$"))
+    public void iEnterInputInFeedback(DataTable inputTable) throws Throwable{
+        for(Map<String, String> feedbackInput : inputTable.asMaps(String.class, String.class)) {
+            if (feedbackInput.containsKey("name")) {
+                iEnterNameInFeedback(feedbackInput.get("name"));
+            }
+            iEnterAgeInFeedback(feedbackInput.get("age"));
+            driver.findElement(By.xpath("//input[@value='" + feedbackInput.get("genre") + "']")).click();
+        }
     }
 }
 
