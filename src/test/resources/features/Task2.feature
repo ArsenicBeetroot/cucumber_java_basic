@@ -16,20 +16,18 @@ Feature: Task2 feature
       | Ellen    | resident homophobe |
 
   Scenario Outline: the thing of editing a person
-    When i click edit icon using PO
-    And i edit "<name>" using PO
-    And i edit "<job>" using PO
-    And i click edit button using PO
+    When i click edit icon
+    And i edit "<name>" name
+    And i edit "<job>" job
+    And i click edit button
     Then i see "<name>" and "<job>" on the list/page idk
     Examples:
       | name     | job                |
       | Marcella | Creative director  |
-      | Ellen    | resident homophobe |
+      | Ellen    | resident funky gal |
 
   Scenario Outline: the thing of removing person
-    When i click delete icon using PO
-    Then person gets removed from this realm using PO
-
-    // lawd have mercy am lost i shall continue tmrw
+    When i click delete icon
+    Then person gets removed from this realm
 
 
